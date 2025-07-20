@@ -1,0 +1,372 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <h1>Welcome.</h1>
+    <p>This is a test HTML document. Fell free to explore its features!</p>
+
+    <h3>Main features:</h3>
+    <button onclick="alert('Button clicked!')">Click Me!</button>
+    <p>This is a button. it uses HTML's deafult code to run. To summon the button, you first need to add a <. Then, type in Button, and close it of with an >. It's rounded cause the CSS feature: border-radious.</Button></p>
+    <p>this is the same button but without rounding. Check it out! <p>
+    <button style="border-radius: 0px;" onclick="alert('Not beutiful button clicked')">Click Me!</button>
+    <p>This is a button without the border-radius. It looks less fancy, but it works the same way.</p>
+    <p>Without much words, to make a button, you need to use the < button > (Sorry about the misspeled button, HTML turns the rest into a button if I don't) tag. You can add an onclick event to it to make it interactive.</p>
+
+   <p style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">If youre tired of that old boring font, Take this! And if you want the same, the code is p style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;">If youre tired of that old boring font, Take this! Easy right? I don't even know why I chose the barely working ultra hard method, but lets waste my life!</p></p> 
+   <div style="background-color: lightblue; padding: 20px; border-radius: 10px;">
+       <h2>Welcome to the blue box!</h2>
+       <p>This is a simple blue box with rounded corners made by a div. I barely know it, but to bad.</p>
+    </div>
+    <p>To make a blue box, you need to use the < div > tag. You can add a background color, padding, and border radius to style it.</p>
+      <h1 class="gradient-text" style="background: linear-gradient(to right, red, blue); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;">Look At Me, I'm Fancy gradent text! I figured this out with Google. its VERY hard.</h1>
+    <div class="gradient-box" style="background: linear-gradient(to right, rgb(106, 116, 255), purple); padding: 20px; border-radius: 10px; color: white;">
+        <p>This is a gradient box. It has a gradient background and rounded corners.</p>
+    </div>
+    <button class="gradient-button" style="background: linear-gradient(to right, rgb(106, 116, 255), purple); color: white; padding: 10px 20px; border: none; border-radius: 5px;">Gradient Button</button>
+    <p>To make a gradient box, you can use the < div > tag with a linear gradient background. You can also style it with padding and border radius.</p>
+    <button id="darkModeToggle">Dark Mode</button>
+    <style>
+        body.dark-mode {
+            background-color: black;
+            color: white;
+        }
+    </style>
+    <script>
+        const button = document.getElementById('darkModeToggle');
+        button.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                button.textContent = 'Light Mode';
+            } else {
+                button.textContent = 'Dark Mode';
+            }
+        });
+    </script>
+    <p>To make a dark mode toggle, you can use JavaScript to add or remove a class from the body element. This class can change the background color and text color.</p>
+    <p>To make a gradient button, you can use the < button > tag with a linear gradient background. You can also style it with padding, border radius, and color.</p>
+
+    <h2>Conclusion</h2>
+    <p>This document demonstrates various HTML and CSS features, including buttons, divs, gradients
+, and dark mode toggling. You can use these features to create interactive and visually appealing web pages.</p>
+    <p>Feel free to explore and modify the code to suit your needs!</p>
+
+    <textarea rows="4" cols="50" placeholder="This is a textarea. You can type in it."></textarea>
+    <p>To create a textarea, you can use the < textarea > tag. You can specify the number of rows and columns to control its size.</p>
+    <h3>More Features</h3>
+    <p>And you really thought I was done? FOOL! I am not.</p>
+    <button id="startBackgroundColorChange">Start Changing Background Color</button>
+    <script>
+        let intervalId;
+
+        function changeBackgroundColor() {
+            const randomColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+            document.body.style.backgroundColor = randomColor;
+        }
+
+        document.getElementById('startBackgroundColorChange').addEventListener('click', function() {
+            if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
+                this.textContent = 'Start Changing Background Color';
+            } else {
+                intervalId = setInterval(changeBackgroundColor, 1000);
+                this.textContent = 'Stop Changing Background Color';
+            }
+        });
+    </script>
+    <div style="border: 1px solid #ccc; padding: 10px; margin-top: 20px;">
+        <h4>Sketchbook</h4>
+        <canvas id="sketchCanvas" width="600" height="400" style="border: 1px solid black;"></canvas>
+        <br/>
+        <button id="eraserButton">Eraser</button>
+        <button id="penButton">Pen</button>
+        <button id="clearButton">Clear</button>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('sketchCanvas');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+        let isErasing = false;
+
+        canvas.addEventListener('mousedown', (e) => {
+            isDrawing = true;
+            draw(e);
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            isDrawing = false;
+            ctx.beginPath();
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (!isDrawing) return;
+            draw(e);
+        });
+
+        function draw(e) {
+            const x = e.offsetX;
+            const y = e.offsetY;
+            if (isErasing) {
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.fillStyle = 'rgba(0,0,0,1)';
+                ctx.beginPath();
+                ctx.arc(x, y, 10, 0, 2 * Math.PI);
+                ctx.fill();
+            } else {
+                ctx.globalCompositeOperation = 'source-over';
+                ctx.lineWidth = 2;
+                ctx.lineCap = 'round';
+                ctx.strokeStyle = 'black';
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+            }
+        }
+
+        document.getElementById('eraserButton').addEventListener('click', () => {
+            isErasing = true;
+        });
+
+        document.getElementById('penButton').addEventListener('click', () => {
+            isErasing = false;
+        });
+
+        document.getElementById('clearButton').addEventListener('click', () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        });
+    </script>
+    <p>This is a sketchbook feature. You can draw on the canvas using the pen or erase with the eraser.</p>
+    <p>To create a sketchbook, you can use the < canvas > tag. You can add buttons to switch between pen and eraser modes, and clear the canvas.</p>
+    <p>To make the canvas interactive, you can use JavaScript to handle mouse events and draw on the canvas.</p>
+
+        <h2>DNO Game</h2>
+        <p>This is a simple game where you have to guess if a number is divisible by 3, 5, or neither.</p>
+        <input type="number" id="numberInput" placeholder="Enter a number">
+        <button id="checkButton">Check</button>
+        <p id="result"></p>
+
+        <script>
+            document.getElementById('checkButton').addEventListener('click', function() {
+                const number = document.getElementById('numberInput').value;
+                let result = '';
+
+                if (number % 3 === 0) {
+                    result += 'Divisible by 3. ';
+                }
+                if (number % 5 === 0) {
+                    result += 'Divisible by 5. ';
+                }
+                if (result === '') {
+                    result = 'Not divisible by 3 or 5.';
+                }
+
+                document.getElementById('result').textContent = result;
+            });
+        </script>
+    <p>This is a simple game where you can check if a number is divisible by 3, 5, or neither. You can enter a number and click the button to see the result.</p>
+    <p>To create this game, you can use an < input > tag to get the user's input and a < button > tag to trigger the check. You can use JavaScript to handle the logic and display the result.</p>
+
+
+    <h1> HERES THE CODE (This is not copyrighted)</h1>
+
+
+    <div>
+        <pre><code class="language-html">&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+    &lt;meta charset="UTF-8"&gt;
+    &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+    &lt;title&gt;Document&lt;/title&gt;
+    &lt;link rel="stylesheet" href="style.css"&gt;
+&lt;/head&gt;
+&lt;body&gt;
+    &lt;h1&gt;Welcome.&lt;/h1&gt;
+    &lt;p&gt;This is a test HTML document. Fell free to explore its features!&lt;/p&gt;
+
+    &lt;h3&gt;Main features:&lt;/h3&gt;
+    &lt;button onclick="alert('Button clicked!')"&gt;Click Me!&lt;/button&gt;
+    &lt;p&gt;This is a button. it uses HTML's deafult code to run. To summon the button, you first need to add a &lt;. Then, type in Button, and close it of with an &gt;. It's rounded cause the CSS feature: border-radious.&lt;/Button&gt;&lt;/p&gt;
+    &lt;p&gt;this is the same button but without rounding. Check it out! &lt;p&gt;
+    &lt;button style="border-radius: 0px;" onclick="alert('Not beutiful button clicked')"&gt;Click Me!&lt;/button&gt;
+    &lt;p&gt;This is a button without the border-radius. It looks less fancy, but it works the same way.&lt;/p&gt;
+    &lt;p&gt;Without much words, to make a button, you need to use the &lt; button &gt; (Sorry about the misspeled button, HTML turns the rest into a button if I don't) tag. You can add an onclick event to it to make it interactive.&lt;/p&gt;
+
+   &lt;p style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;"&gt;If youre tired of that old boring font, Take this! And if you want the same, the code is p style="font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif, Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;"&gt;If youre tired of that old boring font, Take this! Easy right? I don't even know why I chose the barely working ultra hard method, but lets waste my life!&lt;/p&gt;&lt;/p&gt; 
+   &lt;div style="background-color: lightblue; padding: 20px; border-radius: 10px;"&gt;
+       &lt;h2&gt;Welcome to the blue box!&lt;/h2&gt;
+       &lt;p&gt;This is a simple blue box with rounded corners made by a div. I barely know it, but to bad.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;p&gt;To make a blue box, you need to use the &lt; div &gt; tag. You can add a background color, padding, and border radius to style it.&lt;/p&gt;
+      &lt;h1 class="gradient-text" style="background: linear-gradient(to right, red, blue); background-clip: text; -webkit-background-clip: text; -webkit-text-fill-color: transparent; display: inline-block;"&gt;Look At Me, I'm Fancy gradent text! I figured this out with Google. its VERY hard.&lt;/h1&gt;
+    &lt;div class="gradient-box" style="background: linear-gradient(to right, rgb(106, 116, 255), purple); padding: 20px; border-radius: 10px; color: white;"&gt;
+        &lt;p&gt;This is a gradient box. It has a gradient background and rounded corners.&lt;/p&gt;
+    &lt;/div&gt;
+    &lt;button class="gradient-button" style="background: linear-gradient(to right, rgb(106, 116, 255), purple); color: white; padding: 10px 20px; border: none; border-radius: 5px;"&gt;Gradient Button&lt;/button&gt;
+    &lt;p&gt;To make a gradient box, you can use the &lt; div &gt; tag with a linear gradient background. You can also style it with padding and border radius.&lt;/p&gt;
+    &lt;button id="darkModeToggle"&gt;Dark Mode&lt;/button&gt;
+    &lt;style&gt;
+        body.dark-mode {
+            background-color: black;
+            color: white;
+        }
+    &lt;/style&gt;
+    &lt;script&gt;
+        const button = document.getElementById('darkModeToggle');
+        button.addEventListener('click', function() {
+            document.body.classList.toggle('dark-mode');
+            if (document.body.classList.contains('dark-mode')) {
+                button.textContent = 'Light Mode';
+            } else {
+                button.textContent = 'Dark Mode';
+            }
+        });
+    &lt;/script&gt;
+    &lt;p&gt;To make a dark mode toggle, you can use JavaScript to add or remove a class from the body element. This class can change the background color and text color.&lt;/p&gt;
+    &lt;p&gt;To make a gradient button, you can use the &lt; button &gt; tag with a linear gradient background. You can also style it with padding, border radius, and color.&lt;/p&gt;
+
+    &lt;h2&gt;Conclusion&lt;/h2&gt;
+    &lt;p&gt;This document demonstrates various HTML and CSS features, including buttons, divs, gradients
+, and dark mode toggling. You can use these features to create interactive and visually appealing web pages.&lt;/p&gt;
+    &lt;p&gt;Feel free to explore and modify the code to suit your needs!&lt;/p&gt;
+
+    &lt;textarea rows="4" cols="50" placeholder="This is a textarea. You can type in it."&gt;&lt;/textarea&gt;
+    &lt;p&gt;To create a textarea, you can use the &lt; textarea &gt; tag. You can specify the number of rows and columns to control its size.&lt;/p&gt;
+    &lt;h3&gt;More Features&lt;/h3&gt;
+    &lt;p&gt;And you really thought I was done? FOOL! I am not.&lt;/p&gt;
+    &lt;button id="startBackgroundColorChange"&gt;Start Changing Background Color&lt;/button&gt;
+    &lt;script&gt;
+        let intervalId;
+
+        function changeBackgroundColor() {
+            const randomColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+            document.body.style.backgroundColor = randomColor;
+        }
+
+        document.getElementById('startBackgroundColorChange').addEventListener('click', function() {
+            if (intervalId) {
+                clearInterval(intervalId);
+                intervalId = null;
+                this.textContent = 'Start Changing Background Color';
+            } else {
+                intervalId = setInterval(changeBackgroundColor, 1000);
+                this.textContent = 'Stop Changing Background Color';
+            }
+        });
+    &lt;/script&gt;
+    &lt;div style="border: 1px solid #ccc; padding: 10px; margin-top: 20px;"&gt;
+        &lt;h4&gt;Sketchbook&lt;/h4&gt;
+        &lt;canvas id="sketchCanvas" width="600" height="400" style="border: 1px solid black;"&gt;&lt;/canvas&gt;
+        &lt;br/&gt;
+        &lt;button id="eraserButton"&gt;Eraser&lt;/button&gt;
+        &lt;button id="penButton"&gt;Pen&lt;/button&gt;
+        &lt;button id="clearButton"&gt;Clear&lt;/button&gt;
+    &lt;/div&gt;
+
+    &lt;script&gt;
+        const canvas = document.getElementById('sketchCanvas');
+        const ctx = canvas.getContext('2d');
+        let isDrawing = false;
+        let isErasing = false;
+
+        canvas.addEventListener('mousedown', (e) => {
+            isDrawing = true;
+            draw(e);
+        });
+
+        canvas.addEventListener('mouseup', () => {
+            isDrawing = false;
+            ctx.beginPath();
+        });
+
+        canvas.addEventListener('mousemove', (e) => {
+            if (!isDrawing) return;
+            draw(e);
+        });
+
+        function draw(e) {
+            const x = e.offsetX;
+            const y = e.offsetY;
+            if (isErasing) {
+                ctx.globalCompositeOperation = 'destination-out';
+                ctx.fillStyle = 'rgba(0,0,0,1)';
+                ctx.beginPath();
+                ctx.arc(x, y, 10, 0, 2 * Math.PI);
+                ctx.fill();
+            } else {
+                ctx.globalCompositeOperation = 'source-over';
+                ctx.lineWidth = 2;
+                ctx.lineCap = 'round';
+                ctx.strokeStyle = 'black';
+                ctx.lineTo(x, y);
+                ctx.stroke();
+                ctx.beginPath();
+                ctx.moveTo(x, y);
+            }
+        }
+
+        document.getElementById('eraserButton').addEventListener('click', () => {
+            isErasing = true;
+        });
+
+        document.getElementById('penButton').addEventListener('click', () => {
+            isErasing = false;
+        });
+
+        document.getElementById('clearButton').addEventListener('click', () => {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        });
+    &lt;/script&gt;
+    &lt;p&gt;This is a sketchbook feature. You can draw on the canvas using the pen or erase with the eraser.&lt;/p&gt;
+    &lt;p&gt;To create a sketchbook, you can use the &lt; canvas &gt; tag. You can add buttons to switch between pen and eraser modes, and clear the canvas.&lt;/p&gt;
+    &lt;p&gt;To make the canvas interactive, you can use JavaScript to handle mouse events and draw on the canvas.&lt;/p&gt;
+
+        &lt;h2&gt;DNO Game&lt;/h2&gt;
+        &lt;p&gt;This is a simple game where you have to guess if a number is divisible by 3, 5, or neither.&lt;/p&gt;
+        &lt;input type="number" id="numberInput" placeholder="Enter a number"&gt;
+        &lt;button id="checkButton"&gt;Check&lt;/button&gt;
+        &lt;p id="result"&gt;&lt;/p&gt;
+
+        &lt;script&gt;
+            document.getElementById('checkButton').addEventListener('click', function() {
+                const number = document.getElementById('numberInput').value;
+                let result = '';
+
+                if (number % 3 === 0) {
+                    result += 'Divisible by 3. ';
+                }
+                if (number % 5 === 0) {
+                    result += 'Divisible by 5. ';
+                }
+                if (result === '') {
+                    result = 'Not divisible by 3 or 5.';
+                }
+
+                document.getElementById('result').textContent = result;
+            });
+        &lt;/script&gt;
+    &lt;p&gt;This is a simple game where you can check if a number is divisible by 3, 5, or neither. You can enter a number and click the button to see the result.&lt;/p&gt;
+    &lt;p&gt;To create this game, you can use an &lt; input &gt; tag to get the user's input and a &lt; button &gt; tag to trigger the check. You can use JavaScript to handle the logic and display the result.&lt;/p&gt;
+</code></pre>
+        <button onclick="copyCode()">Copy Code</button>
+    </div>
+    
+    <script>
+        function copyCode() {
+            const code = document.querySelector('code').innerText;
+            navigator.clipboard.writeText(code);
+            alert('Code copied to clipboard!');
+        }
+    </script>
+
+
+</body>
+
+</html> 
